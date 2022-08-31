@@ -43,7 +43,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             placesjson[i].pk
             ];
     }
-    // console.log(arr)
+    console.log(arr)
      
     var markerTmp;      // 마커
     var customOverlay;  // 오버레이
@@ -57,8 +57,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             map:map
         });
      
-        contentStr = "<div class='customoverlay'><a href='https://map.kakao.com/link/map/"+ arr[i][4] +"' target='_blank'><span class='title'>"+ arr[i][0] +"</span></a></div>";
-     
+        contentStr = "<div class='customoverlay'><a href='/details/"+ arr[i][5] +"' target='_blank'><span class='title'>"+ arr[i][0] +"</span></a></div>";
         customOverlay = new kakao.maps.CustomOverlay({
             map: map,
             position: new daum.maps.LatLng(arr[i][1],arr[i][2]),
