@@ -13,3 +13,11 @@ def index(request):
         'placesjson': placesjson,
     }
     return render(request, 'main/index.html', context)
+
+def details(request, pk):
+    place = Place.objects.get(pk=pk)
+    context = {
+        'place': place,
+        'name': place.name,
+    }
+    return render(request, 'main/details.html', context)
