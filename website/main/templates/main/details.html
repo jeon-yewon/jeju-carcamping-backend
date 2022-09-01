@@ -1,8 +1,27 @@
+<!-- <script type="text/javascript">
+    var photojson = {{photojson|safe}}
+
+    var arr = new Array();
+    for (var i=0; i < photojson.length; i++){
+        arr[i] = [
+            photojson[i].fields.place,
+            photojson[i].pk,
+            photojson[i].fields.photo,
+            ];
+    }
+</script> -->
 <p>
-    {{place.name}}
-    {{place.location}}
+    {% for a in photo %}
+        <!-- {{a.photo}} -->
+        {% load static %}
+            {{a.photo}}
+            <!-- http://127.0.0.1/media/place/test2.jpg -->
+            <img src="../../media/{{a.photo}}"/>
+    {% endfor %}
 </p>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var name = "{{name}}"
     console.log(name)
-</script>
+</script> -->
+
+ <!-- 다중 이미지 테스트 -->
