@@ -7,7 +7,10 @@ class Place(models.Model):
     lan = models.FloatField(default = '')
     location = models.CharField(max_length=50, default = '')
     marker = models.CharField(max_length=15, default = '')
-    content = models.TextField()
+    facilities = models.TextField(default = '')
+    info = models.TextField(default='')
+    moreinfo = models.TextField(default='')
+
     
     # admin에서 이름으로 출력되게 변경
     def __str__(self):

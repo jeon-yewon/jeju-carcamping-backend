@@ -24,7 +24,7 @@ def details(request, pk):
     # photojson = serializers.serialize('json', Photo.objects.all())
     photo = Photo.objects.filter(place=pk)
     context = {
-        # 'place': place,
+        'place': place,
         # 'name': place.name,
         # 'photojson': photojson,
         'photo' : photo
