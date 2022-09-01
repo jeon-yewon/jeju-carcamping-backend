@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,21 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/map.css">
-    <link rel="stylesheet" href="./css/style.css">
-</head> -->
+    <link rel="stylesheet" href="{% static './css/reset.css' %}">
+    <link rel="stylesheet" href="{% static './css/map.css' %}">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+</head>
 <body>
     <section class="container1">
-        <header class="container1-header">
-            <h2><a href="./index.html">CARCAMPING</a></h2>
-        </header>
-
-        <main class="main-content">
-            <h1>제주도의 차박 장소를 한눈에 보기!</h1>
-            <p>수 많은 차박지 중에서 유명한 장소에 대해 보기 쉽게 안내해드릴게요</p>
-            <div class="more-content-btn"><a href="#more-content">자세히 알아보기</a></div>
-        </main>
+        <div class="overlay">
+            <header class="container1-header">
+                <h2><a href="{% url 'index' %}">CARCAMPING</a></h2>
+            </header>
+    
+            <main class="main-content">
+                <h1>제주도의 차박 장소를 한눈에 보기!</h1>
+                <p>수 많은 차박지 중에서 유명한 장소에 대해 보기 쉽게 안내해드릴게요</p>
+                <div class="more-content-btn"><a href="#more-content">자세히 알아보기</a></div>
+            </main>
+        </div>
     </section>
 
     <section class="container2" id="more-content">
@@ -35,54 +38,78 @@
             <div class="card">
                 <div class="card-img1"></div>
                 <div class="card-text">
-                    <h2>장점1</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, excepturi.</p>
+                    <h2>OCEAN VIEW</h2>
+                    <p>
+                        황홀한 일출과 일몰을<br>
+                        제주의 푸른 바다에서 감상하세요.
+                    </p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-img2"></div>
                 <div class="card-text">
-                    <h2>장점2</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, maxime.</p>
+                    <h2>SAVE MONEY</h2>
+                    <p>
+                        비싼 캠핑 장비 구매 없이도 비용절감과<br>
+                        캠핑의 낭만을 자신만의 공간에서 즐겨보세요.
+                    </p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-img3"></div>
                 <div class="card-text">
-                    <h2>장점3</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, maxime.</p>
+                    <h2>MAKE MEMORIES</h2>
+                    <p>
+                        싱그러운 제주 자연 속에서 소중한 사람들과<br>
+                        잊지 못할 추억을 만들어 보세요.
+                    </p>
                 </div>
             </div>
         </article>
     </section>
 
     <section class="container3">
-        <article class="map-container map-container1">
-            <div class="map-text1">
-                <h2 class="map-text-margin-bottom">지도설명1</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, tempore distinctio deserunt, ex quibusdam molestias qui alias ipsam, minima facere maxime? Facere libero doloremque quasi porro recusandae molestias laudantium cumque.</p>
-            </div>
-            <div class="map-img1"></div>
-        </article>
+        <main class="map-main-container">
+            <article class="map-content1">
+                <div class="map_img1">
+                    <div class="map-content1-yc1"></div>
+                    <div class="map-content1-yc2"></div>
+                </div>
+                <div class="map_text1">
+                    <h2>지도선택</h2>
+                    <p>저희가 추천하는 차박 여행지를 직접 클릭해서 정보를 찾아볼 수 있습니다. <br>
+                    가보고 싶은 목적지를 선택하시거나, 정보를 얻어 제주도에서의 추억을 쌓아보세요.
+                    </p>
+                </div>
+            </article>
 
-        <article class="map-container map-container2">
-            <div class="map-img2"></div>
-            <div class="map-text2">
-                <h2 class="map-text-margin-bottom">지도설명1</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, tempore distinctio deserunt, ex quibusdam molestias qui alias ipsam, minima facere maxime? Facere libero doloremque quasi porro recusandae molestias laudantium cumque.</p>
-            </div>
-        </article>
+            <article class="map-content2">
+                <div class="map_text2">
+                    <h2>로드맵</h2>
+                    <p>가고싶은 차박 장소를 선택하면 주변을 볼 수 있는 로드맵을 보여줍니다.<br>이쁜 풍경과 주변 시설을 미리 탐색해보세요!</p>
+                </div>
+                <div class="map_img2">
+                    <div class="map-content2-yc1"></div>
+                    <div class="map-content2-yc2"></div>
+                </div>
+            </article>
+        </main>
     </section>
 
-    <div id="map" style="width:100%;height:350px;"></div>
+    <section class="container4">
+        <h2>원하시는 목적지를 선택하세요!</h2>
+        <div id="map" style="width:100%;height:350px;"></div>
+    </section>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8656eb9abde658d11ee5b7b90a70500"></script>
     <script src="https://kit.fontawesome.com/88a1e9c0a5.js" crossorigin="anonymous"></script>
-    <script src="./js/text_random.js"></script>
+    <script src="{% static './js/text_random.js'%}"></script>
+
+    <!-- model 변수 사용 -->
     <script type="text/javascript">
         var placesjson = {{placesjson|safe}}
     </script>
-    {% load static %}
+
     <script src="{% static 'map.js' %}"></script>
 </body>
 </html>
