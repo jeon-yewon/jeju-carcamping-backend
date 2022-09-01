@@ -1,3 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static './css/slider-style.css' %}">
+</head>
+<body>
+    <div class="carousel-container">
+        <i class="fa-solid fa-arrow-left-long" id="prevBtn"></i>
+        <i class="fa-solid fa-arrow-right" id="nextBtn"></i>
+        <div class="carousel-slide">
+            {% for a in photo %}
+                <img src="../../media/{{a.photo}}" alt="">
+            {% endfor %}
+        </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/88a1e9c0a5.js" crossorigin="anonymous"></script>
+    <script src="{% static './js/main.js' %}"></script>
+</body>
+</html>
+
+
 <!-- <script type="text/javascript">
     var photojson = {{photojson|safe}}
 
@@ -10,15 +37,14 @@
             ];
     }
 </script> -->
-<p>
+<!-- <p>
     {% for a in photo %}
-        <!-- {{a.photo}} -->
-        {% load static %}
+        {{a.photo}}
             {{a.photo}}
-            <!-- http://127.0.0.1/media/place/test2.jpg -->
+            http://127.0.0.1/media/place/test2.jpg
             <img src="../../media/{{a.photo}}"/>
     {% endfor %}
-</p>
+</p> -->
 <!-- <script type="text/javascript">
     var name = "{{name}}"
     console.log(name)
