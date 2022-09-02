@@ -21,8 +21,8 @@
 ## 3. 프로젝트 구조
 ```
  └─ website
-      │  manage.py
-      │  db.sqlite3
+      ├─ manage.py
+      ├─ db.sqlite3
       │  
       ├─dgangoproj
       │  ├─ settings.py
