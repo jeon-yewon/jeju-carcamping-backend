@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static './css/slide.css' %}">
     <link rel="stylesheet" href="{% static './css/reset.css' %}">
-    <!-- <link rel="stylesheet" href="{% static './css/detailmap.css' %}"> -->
-    <link rel="stylesheet" href="{% static './css/detailstyle.css' %}">
+    <link rel="stylesheet" href="{% static './css/map.css' %}">
+    <link rel="stylesheet" href="{% static './css/slide.css' %}">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
 </head>
 <body>
     <main class="main_container">
@@ -55,37 +56,22 @@
 
     
     <script src="https://kit.fontawesome.com/88a1e9c0a5.js" crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8656eb9abde658d11ee5b7b90a70500"></script> -->
-    <!-- <script src="{% static './js/detailmap.js' %}"></script>
-    <script src="{% static './js/detailroadmap.js' %}"></script> -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8656eb9abde658d11ee5b7b90a70500"></script> 
+    <!-- js 사용 변수 -->
+    <script type="text/javascript">
+        var place = "{{place.name}}";
+        var pLocation = "{{place.location}}";
+        var pLat = "{{place.lat}}";
+        var pLan = "{{place.lan}}";
+        var pMapoverlat = "{{place.mapoverlat}}";
+        var pMapoverlan = "{{place.mapoverlan}}";
+        var pMaplink = "{{place.maplink}}";
+        var pMapthumb = "{{place.mapthumb}}"
+    </script>
     <script src="{% static './js/slide.js' %}"></script>
+    <script src="{% static './js/map.js' %}"></script>
+    <script src="{% static './js/detail.js' %}"></script>
+
 </body>
 </html>
 
-
-<!-- <script type="text/javascript">
-    var photojson = {{photojson|safe}}
-
-    var arr = new Array();
-    for (var i=0; i < photojson.length; i++){
-        arr[i] = [
-            photojson[i].fields.place,
-            photojson[i].pk,
-            photojson[i].fields.photo,
-            ];
-    }
-</script> -->
-<!-- <p>
-    {% for a in photo %}
-        {{a.photo}}
-            {{a.photo}}
-            http://127.0.0.1/media/place/test2.jpg
-            <img src="../../media/{{a.photo}}"/>
-    {% endfor %}
-</p> -->
-<!-- <script type="text/javascript">
-    var name = "{{name}}"
-    console.log(name)
-</script> -->
-
- <!-- 다중 이미지 테스트 -->

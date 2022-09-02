@@ -3,15 +3,17 @@ from django.db import models
 # Create your models here.
 class Place(models.Model):
     name = models.CharField(max_length=50, default = '')
+    location = models.CharField(max_length=50, default = '')
     lat = models.FloatField(default = '')
     lan = models.FloatField(default = '')
-    location = models.CharField(max_length=50, default = '')
-    marker = models.CharField(max_length=15, default = '')
+    mapoverlat = models.FloatField(default = '')
+    mapoverlan = models.FloatField(default = '')
     facilities = models.TextField(default = '')
     info = models.TextField(default='')
     moreinfo = models.TextField(default='')
+    maplink = models.CharField(max_length=15, default = '')
+    mapthumb = models.CharField(max_length=100, default = '')
 
-    
     # admin에서 이름으로 출력되게 변경
     def __str__(self):
         return self.name

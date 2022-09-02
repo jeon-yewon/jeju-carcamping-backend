@@ -1,83 +1,63 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        mapOption = { 
-            center: new kakao.maps.LatLng(33.451475, 126.570528), // 지도의 중심좌표
-            level: 11 // 지도의 확대 레벨
-        };
-     
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-     
-    // 마커가 표시될 위치입니다 
-    var markerPosition  = new kakao.maps.LatLng(35.8755582, 128.6053956); 
-     
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        position: markerPosition
+    mapCenter = new kakao.maps.LatLng(pLat, pLan), // 지도의 중심좌표
+    mapOption = {
+        center: mapCenter, // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 커스텀 오버레이에 표시할 내용입니다
+// HTML 문자열 또는 Dom Element 입니다
+var content = '<div class="overlay_info">';
+content += '    <a href="https://place.map.kakao.com/'+ pMaplink +'" target="_blank">'
+content += '<strong>'+ place +'</strong></a>';
+content += '    <div class="desc">';
+content += '        <img src="'+pMapthumb+'" alt="">';
+content += '        <span class="address">'+ pLocation +'</span>';
+content += '    </div>';
+content += '</div>';
+
+// 커스텀 오버레이가 표시될 위치입니다 
+var position = new kakao.maps.LatLng(pLat, pLan);
+
+// 커스텀 오버레이를 생성합니다
+var mapCustomOverlay = new kakao.maps.CustomOverlay({
+    position: position,
+    content: content,
+    xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+    yAnchor: 1.1 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+});
+
+// 커스텀 오버레이를 지도에 표시합니다
+mapCustomOverlay.setMap(map);
+
+var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
+var rvClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+//지도의 중심좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+rvClient.getNearestPanoId(mapCenter, 50, function(panoId) {
+    rv.setPanoId(panoId, mapCenter); //panoId와 중심좌표를 통해 로드뷰 실행
+});
+
+kakao.maps.event.addListener(rv, 'init', function() {
+
+    // 커스텀 오버레이를 생성합니다
+    var rvCustomOverlay = new kakao.maps.CustomOverlay({
+        position: position,
+        content: content,
+        xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+        yAnchor: 0.5 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
     });
-     
-    // 마커가 지도 위에 표시되도록 설정합니다
-    //marker.setMap(map);
-     
-    // 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content : "<div style='position: absolute; left: 0px; top: 0px;'><div style='width:140px;padding:1px;text-align:center;'>칠성종합시장</div></div>" 
-    });
-      
-    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-    //infowindow.open(map, marker); 
-     
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';                              // 마커이미지 주소
-        imageSize = new kakao.maps.Size(34, 36);                // 마커이미지의 크기
-        imageOption = {offset: new kakao.maps.Point(17, 36)};   // 마커의 좌표와 일치시킬 이미지 안에서의 좌표설정
-          
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-   
-    var arr = new Array();
-    for (var i=0; i < placesjson.length; i++){
-        arr[i] = [
-            placesjson[i].fields.name,
-            placesjson[i].fields.lat,
-            placesjson[i].fields.lan,
-            placesjson[i].fields.location,
-            placesjson[i].fields.marker,
-            placesjson[i].pk
-            ];
-    }
-    console.log(arr)
-     
-    var markerTmp;      // 마커
-    var customOverlay;  // 오버레이
-    var contentStr;
-     
-    for (var i=0;i<arr.length;i++) {
-        markerTmp = new daum.maps.Marker({
-            position: new daum.maps.LatLng(arr[i][1],arr[i][2]),
-            title: arr[i][0],
-            image: markerImage,
-            map:map
-        });
-     
-        contentStr = "<div class='customoverlay'><a href='/details/"+ arr[i][5] +"' target='_blank'><span class='title'>"+ arr[i][0] +"</span></a></div>";
-        customOverlay = new kakao.maps.CustomOverlay({
-            map: map,
-            position: new daum.maps.LatLng(arr[i][1],arr[i][2]),
-            content: contentStr,
-            yAnchor: 1 
-        });
-    }
-     
-     
-    // 지도 타입 변경 컨트롤을 생성한다
-    var mapTypeControl = new kakao.maps.MapTypeControl();
-     
-    // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
-    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);    
-     
-    // 지도에 확대 축소 컨트롤을 생성한다
-    var zoomControl = new kakao.maps.ZoomControl();
-     
-    // 지도의 우측에 확대 축소 컨트롤을 추가한다
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-     
-    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-    // marker.setMap(null);
+
+    //rvCustomOverlay.setAltitude(2); //커스텀 오버레이의 고도값을 설정합니다.(로드뷰 화면 중앙이 0입니다)
+    rvCustomOverlay.setMap(rv);
+
+    var projection = rv.getProjection(); // viewpoint(화면좌표)값을 추출할 수 있는 projection 객체를 가져옵니다.
+    
+    // 커스텀오버레이의 position과 altitude값을 통해 viewpoint값(화면좌표)를 추출합니다.
+    var viewpoint = projection.viewpointFromCoords(rvCustomOverlay.getPosition(), rvCustomOverlay.getAltitude());
+
+    rv.setViewpoint(viewpoint); //커스텀 오버레이를 로드뷰의 가운데에 오도록 로드뷰의 시점을 변화 시킵니다.
+});

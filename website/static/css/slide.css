@@ -1,21 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    height: 100vh;
-}
-
 .carousel-container {
     width: 600px;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .carousel-slide {
@@ -48,3 +35,6 @@ body {
     color: #fff;
     cursor: pointer;
 }
+
+
+
