@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JEJU CARCAMPING</title>
     <link rel="stylesheet" href="{% static './css/reset.css' %}">
     <link rel="stylesheet" href="{% static './css/map.css' %}">
     <link rel="stylesheet" href="{% static './css/slide.css' %}">
@@ -14,6 +14,11 @@
 </head>
 <body>
     <main class="main_container">
+        <nav class="sub_nav_container">
+            <h2><a href="{% url 'index' %}">carcamping</a></h2>
+        </nav>
+        {% load static %}
+        <video src="{% static './video/background_video2.mp4' %}" autoplay muted loop></video>
         <section class="text_container">
             <h1>{{place.name}}</h1>
             <p>주소 <i class="fa-solid fa-location-dot"></i> : {{place.location}}</p>
