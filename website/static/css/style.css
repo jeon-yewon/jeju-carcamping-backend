@@ -44,7 +44,7 @@
 }
 
 .text_container p::before{
-    content: "- ";
+    content: " ";
 }
 
 

@@ -21,17 +21,17 @@
         <video src="{% static './video/background_video2.mp4' %}" autoplay muted loop></video>
         <section class="text_container">
             <h1>{{place.name}}</h1>
-            <p>주소 <i class="fa-solid fa-location-dot"></i> : {{place.location}}</p>
+            <p><i class="fa-solid fa-location-dot"></i> 주소 : {{place.location}}</p>
             {% if place.facilities != "-" %}
-                <p>편의시설 <i class="fa-solid fa-square-parking"></i> : {{place.facilities}} </p>
+                <p><i class="fa-solid fa-store"></i> 편의시설 : {{place.facilities}} </p>
             {% else %}
             {% endif %}
             {% if place.info != "-" %}
-                <p>소개 <i class="fa-sharp fa-solid fa-comment"></i> : {{place.info}}</p>
+                <p><i class="fa-solid fa-umbrella-beach"></i> 소개 : {{place.info}}</p>
             {% else %}
             {% endif %}
             {% if place.moreinfo != "-" %}
-                <p>상세 정보 <i class="fa-solid fa-circle-info"></i> : {{place.moreinfo}}</p>
+                <p><i class="fa-solid fa-circle-info"></i> 상세 정보 : {{place.moreinfo}}</p>
             {% else %}
             {% endif %}
         </section>
@@ -51,7 +51,7 @@
                     <i class="fa-solid fa-arrow-right" id="nextBtn"></i>
                     <div class="carousel-slide">
                         {% for a in photo %}
-                        <img src="../../media/{{a.photo}}" alt="">
+                            <img src="../../media/{{a.photo}}" alt="">
                         {% endfor %}
                     </div>
                 </div>
